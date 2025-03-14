@@ -26,7 +26,7 @@ export default function OrderDetails({ order }) {
             <div className="accordion mb-2" id="orders">
                 <div className="accordion-item">
                     <h2 className="accordion-header">
-                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#${order.id}`} aria-controls="collapseOne">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#${order.id}`} aria-controls="collapseOne">
                             Order # - {order.id}
                         </button>
                     </h2>
