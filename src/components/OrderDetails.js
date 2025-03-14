@@ -23,15 +23,15 @@ export default function OrderDetails({ order }) {
                 </div>
             </div> */}
 
-            <div class="accordion mb-2" id="orders">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#${order.id}`} aria-controls="collapseOne">
+            <div className="accordion mb-2" id="orders">
+                <div className="accordion-item">
+                    <h2 className="accordion-header">
+                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#${order.id}`} aria-controls="collapseOne">
                             Order # - {order.id}
                         </button>
                     </h2>
-                    <div id={order.id} class="accordion-collapse collapse show" data-bs-parent="#orders">
-                        <div class="accordion-body p-0">
+                    <div id={order.id} className="accordion-collapse collapse" data-bs-parent="#orders">
+                        <div className="accordion-body p-0">
                             <div className="card">
                                 <div className="card-header">
                                    Status - {order.status}
@@ -39,7 +39,7 @@ export default function OrderDetails({ order }) {
                                 <div className="card-body">
                                     <div className="card-text">
                                         {
-                                            order.items.map(item => <OrderItem item={item} />)
+                                            order.items.map(item => <OrderItem key={item.id} item={item} />)
                                         }
                                     </div>
                                 </div>

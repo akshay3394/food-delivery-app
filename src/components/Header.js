@@ -7,6 +7,9 @@ import CartContext from "../store/CartContext"
 import Cart from "./Cart"
 import CheckOutPage from "./CheckOutPage"
 import OrdersPage from "./OrdersPage"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCartShopping, faTree } from "@fortawesome/free-solid-svg-icons"
+import { faLemon } from "@fortawesome/free-regular-svg-icons"
 
 function Header({ }) {
 
@@ -50,18 +53,24 @@ function Header({ }) {
     return (
         <>
             <Nav>
-                <NavbarBrand>Tomato</NavbarBrand>
+                <NavbarBrand>
+                    <FontAwesomeIcon icon={faLemon} size="lg"/> Lemon tree <FontAwesomeIcon icon={faTree} size="lg"/>
+                </NavbarBrand>
 
                 <div className="float-end">
-                    <Button id="cart" style={"light"} onClick={openCart}>Cart ({numberOfItems})</Button>
+                    <Button id="cart" style={"light"} onClick={openCart}>
+                        <FontAwesomeIcon icon={faCartShopping} /> ({numberOfItems})
+                    </Button>
                     <Button style={"light"} onClick={openOrders} >Orders</Button>
+
+
                 </div>
             </Nav>
-            
+
             <Cart show={isOpenCart} closeCart={closeCart} openCheckout={openCheckout} />
 
             <CheckOutPage show={isShowCheckout} closeCheckOutPage={closeCheckout} openCart={openCart} />
-        
+
             <OrdersPage show={isShowOrders} closeOrders={closeOrders} />
         </>
     )

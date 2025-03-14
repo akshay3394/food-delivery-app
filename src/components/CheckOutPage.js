@@ -3,6 +3,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import CartContext from "../store/CartContext";
 import Button from "./Button";
 import Modal from "./Modal";
+import { faArrowLeft, faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 export default function CheckOutPage({ show, closeCheckOutPage, openCart }) {
@@ -108,7 +110,7 @@ export default function CheckOutPage({ show, closeCheckOutPage, openCart }) {
         <h3 className="text-center mb-4">Provide delivery details</h3>
 
         <h4 className="text-center">
-            Total: {totalPrice} Rs
+            Total: {totalPrice} <FontAwesomeIcon icon={faIndianRupeeSign}/>
         </h4>
 
         <form onSubmit={handlePlaceOrder}>
@@ -122,15 +124,17 @@ export default function CheckOutPage({ show, closeCheckOutPage, openCart }) {
                     isSubmitting ? "Submitting.." : "Place Order"
                 }
             </Button>
-            <Button type="button" className="float-end" style={"dark"} onClick={backToCart}>Back to Cart</Button>
+            <Button type="button" className="float-end" style={"dark"} onClick={backToCart}>
+                <FontAwesomeIcon icon={faArrowLeft}/> Back to Cart
+            </Button>
             <Button type="button" className="float-end" style={"light"} onClick={closeCheckOutPage}>Cancle</Button>
         </form>
     </>
 
 
     const closeCheckoutButton = <div className="text-center my-2" >
-            <Button style={"dark"} onClick={closeCheckout}>Close</Button>
-        </div>
+        <Button style={"dark"} onClick={closeCheckout}>Close</Button>
+    </div>
 
 
     return (
