@@ -20,7 +20,7 @@ export default function FoodItem({ foodItem, onClick }) {
     }
 
     return (
-        <div className={"col-4 py-2"} onMouseOver={highlightItem} onMouseLeave={unHighlightItem}>
+        <div className={"col-sm-12 col-md-6 col-lg-4 py-2"} onMouseOver={highlightItem} onMouseLeave={unHighlightItem}>
             <div className={`card h-100 bg-light ${cardStyle}`}>
                 <img src={`http://localhost:3001/${foodItem.image}`} style={{ height: 250 }} className="card-img-top" alt={foodItem.name} />
                 <div className="card-body">
