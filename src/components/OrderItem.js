@@ -1,3 +1,5 @@
+import { faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export default function OrderItem({ item }) {
 
@@ -9,8 +11,7 @@ export default function OrderItem({ item }) {
     }
 
     return (
-        <div className="container">
-            <div className="row border my-2">
+            <div className="row border-bottom">
                 <div className="col-2 p-2" >
                     <div className="w-100 h-100" style={ imageStyle}>
                     </div>
@@ -20,10 +21,9 @@ export default function OrderItem({ item }) {
                         {item.name}
                     </div>
                     <div className="px-2 pt-2">
-                        Rs. {item.price} x {item.quantity}
+                        <FontAwesomeIcon icon={faIndianRupeeSign} /> {item.price} x {item.quantity}
                     </div>
                 </div>
             </div>
-        </div>
     )
 }

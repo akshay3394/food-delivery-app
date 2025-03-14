@@ -59,7 +59,7 @@ function Header({ }) {
 
                 <div className="float-end">
                     <Button id="cart" style={"light"} onClick={openCart}>
-                        <FontAwesomeIcon icon={faCartShopping} /> ({numberOfItems})
+                        <FontAwesomeIcon icon={faCartShopping} size="lg"/> ({numberOfItems})
                     </Button>
                     <Button style={"light"} onClick={openOrders} >Orders</Button>
 

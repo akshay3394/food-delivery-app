@@ -38,20 +38,22 @@ export default function CartItem({ item }) {
                         </span>
                     </div>
                     <div className="px-2 pt-2">
-                        <FontAwesomeIcon icon={faIndianRupeeSign} /> {item.price} x {item.quantity}
+                        <FontAwesomeIcon icon={faIndianRupeeSign} /> <em>{item.price} x {item.quantity}</em>
                     </div>
                 </div>
                 <div className="col-4 pt-3">
                     <div className="float-end">
-                        <button className="btn btn-outline-success" onClick={() => removeItem(item.id)}>
-                            <FontAwesomeIcon icon={faMinus} />
-                        </button>
-                        <span className="p-2">
-                            {item.quantity}
-                        </span>
-                        <button className="btn btn-outline-success" onClick={() => addItem(item)}>
-                            <FontAwesomeIcon icon={faPlus} />
-                        </button>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button className="btn btn-success" onClick={() => removeItem(item.id)}>
+                                <FontAwesomeIcon icon={faMinus} />
+                            </button>
+                            <span className="text-bg-success px-1 py-2">
+                                {item.quantity}
+                            </span>
+                            <button className="btn btn-success" onClick={() => addItem(item)}>
+                                <FontAwesomeIcon icon={faPlus} />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

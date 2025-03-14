@@ -4,6 +4,7 @@ import FoodItems from './components/FoodItems';
 import Header from './components/Header';
 
 function App() {
+
   return (
     <>
       <CartConextProvider>

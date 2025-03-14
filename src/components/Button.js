@@ -4,7 +4,7 @@ export default function Button({ id = null, children, style, ...props }) {
 
     // console.log(props.onClick);
 
-    let buttonStyle = "ms-2 btn"
+    let buttonStyle = "btn"
 
     const additonalProps = Object.keys(props).filter(k => k != "className")
 

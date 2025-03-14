@@ -47,8 +47,8 @@ export default function Cart({ show, closeCart, openCheckout }) {
                 }
             </div>
 
-            <div className="mx-2 my-3 text-success">
-                Total: {totalPrice} <FontAwesomeIcon icon={faIndianRupeeSign} />
+            <div className="mx-2 my-3 text-success h5">
+                <strong>Total: <em>{totalPrice}</em></strong> <FontAwesomeIcon icon={faIndianRupeeSign} />
             </div>
 
 

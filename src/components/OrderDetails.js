@@ -1,4 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import OrderItem from "./OrderItem";
+import { faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function OrderDetails({ order }) {
@@ -34,7 +36,16 @@ export default function OrderDetails({ order }) {
                         <div className="accordion-body p-0">
                             <div className="card">
                                 <div className="card-header">
-                                   Status - {order.status}
+                                    Status - {order.status}
+                                </div>
+                                <div className="card-header fs-6 fw-light">
+                                    <div className="row">
+                                        <div className="col">Name : {order.name}</div>
+                                        <div className="col">Phone : {order.phone}</div>
+                                    </div>
+                                    <span>
+                                        Address: {order.address}
+                                    </span>
                                 </div>
                                 <div className="card-body">
                                     <div className="card-text">
@@ -44,7 +55,7 @@ export default function OrderDetails({ order }) {
                                     </div>
                                 </div>
                                 <div className="card-footer text-end">
-                                    Total price: Rs. {order.totalPrice}
+                                    Total price: <FontAwesomeIcon icon={faIndianRupeeSign} /> {order.totalPrice}
                                 </div>
                             </div>
                         </div>
