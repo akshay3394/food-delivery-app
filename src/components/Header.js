@@ -5,11 +5,11 @@ import Button from "./Button"
 import { useContext, useState } from "react"
 import CartContext from "../store/CartContext"
 import Cart from "./Cart"
-import CheckOutPage from "./CheckOutPage"
 import OrdersPage from "./OrdersPage"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartShopping, faTree } from "@fortawesome/free-solid-svg-icons"
 import { faLemon } from "@fortawesome/free-regular-svg-icons"
+import { Link, Outlet } from "react-router-dom"
 
 function Header({ }) {
 
@@ -54,24 +54,32 @@ function Header({ }) {
         <>
             <Nav>
                 <NavbarBrand>
-                    <FontAwesomeIcon icon={faLemon} size="lg"/> Lemon tree <FontAwesomeIcon icon={faTree} size="lg"/>
+                    <FontAwesomeIcon icon={faLemon} size="lg" /> Lemon tree <FontAwesomeIcon icon={faTree} size="lg" />
                 </NavbarBrand>
 
                 <div className="float-end">
-                    <Button id="cart" style={"light"} onClick={openCart}>
-                        <FontAwesomeIcon icon={faCartShopping} size="lg"/> ({numberOfItems})
-                    </Button>
-                    <Button style={"light"} onClick={openOrders} >Orders</Button>
+                    {/* <Button id="cart" style={"light"} onClick={openCart}>
+                        <FontAwesomeIcon icon={faCartShopping} size="lg" /> ({numberOfItems})
+                    </Button> */}
+                    {/* <Button style={"light"} onClick={openOrders} >Orders</Button> */}
+
+                    <Link to="cart" className="btn btn-light">
+                        <FontAwesomeIcon icon={faCartShopping} size="lg" /> ({numberOfItems})
+                    </Link>
+
+                    <Link to="orders" className="btn btn-light">Orders</Link>
 
 
                 </div>
             </Nav>
 
-            <Cart show={isOpenCart} closeCart={closeCart} openCheckout={openCheckout} />
+            {/* <Cart show={isOpenCart} closeCart={closeCart} openCheckout={openCheckout} /> */}
 
-            <CheckOutPage show={isShowCheckout} closeCheckOutPage={closeCheckout} openCart={openCart} />
+            {/* <CheckOutPage show={isShowCheckout} closeCheckOutPage={closeCheckout} openCart={openCart} /> */}
 
-            <OrdersPage show={isShowOrders} closeOrders={closeOrders} />
+            {/* <OrdersPage show={isShowOrders} closeOrders={closeOrders} /> */}
+
+            <Outlet></Outlet>
         </>
     )
 }

@@ -5,24 +5,18 @@ import Button from "./Button";
 import CartItem from "./CartItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 
-export default function Cart({ show, closeCart, openCheckout }) {
+export default function Cart({ closeCart, openCheckout }) {
 
     const modalRef = useRef()
 
     const { items } = useContext(CartContext)
 
     useEffect(function () {
-        if (show) {
-            modalRef.current.openModel()
-        }
-
-        if (!show) {
-            // console.log("calling: modalRef.current.closeModel() ");       
-            modalRef.current.closeModel()
-        }
-    }, [show])
+        modalRef.current.openModel()
+    }, [])
 
     const totalPrice = items.reduce((prev, item) => (prev + item.price * item.quantity), 0)
 
@@ -52,11 +46,14 @@ export default function Cart({ show, closeCart, openCheckout }) {
             </div>
 
 
-            <Button style={"light"} onClick={closeCart}>close</Button>
+            <Link className="btn btn-light" to="/" onClick={closeCart}>close</Link>
 
-            <Button style={"dark"} onClick={openCheckoutPage} disabled={!items.length > 0} >
-                Proceed to checkout <FontAwesomeIcon icon={faArrowRight}/>
-            </Button>
+            {
+                items.length > 0 && <Link className="btn btn-dark" to="/checkout" >
+                        Proceed to checkout <FontAwesomeIcon icon={faArrowRight} />
+                    </Link>
+            }
+
 
         </Modal>
 

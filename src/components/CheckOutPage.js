@@ -5,9 +5,10 @@ import Button from "./Button";
 import Modal from "./Modal";
 import { faArrowLeft, faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 
-export default function CheckOutPage({ show, closeCheckOutPage, openCart }) {
+export default function CheckOutPage({ closeCheckOutPage, openCart }) {
 
     const modalRef = useRef()
 
@@ -18,15 +19,8 @@ export default function CheckOutPage({ show, closeCheckOutPage, openCart }) {
     const totalPrice = items.reduce((prev, item) => (prev + item.price * item.quantity), 0)
 
     useEffect(function () {
-        if (show) {
-            modalRef.current.openModel()
-        }
-
-        if (!show) {
-            // console.log("calling: modalRef.current.closeModel() ");       
-            modalRef.current.closeModel()
-        }
-    }, [show])
+        modalRef.current.openModel()
+    }, [])
 
     const nameRef = useRef()
     const phoneRef = useRef()
@@ -110,7 +104,7 @@ export default function CheckOutPage({ show, closeCheckOutPage, openCart }) {
         <h3 className="text-center mb-4">Provide delivery details</h3>
 
         <h4 className="text-center">
-            Total: {totalPrice} <FontAwesomeIcon icon={faIndianRupeeSign}/>
+            Total: {totalPrice} <FontAwesomeIcon icon={faIndianRupeeSign} />
         </h4>
 
         <form onSubmit={handlePlaceOrder}>
@@ -119,21 +113,24 @@ export default function CheckOutPage({ show, closeCheckOutPage, openCart }) {
             <Input label="Address" name="address" ref={addressRef} textarea required={true} className="form-control-sm" />
             <Input label="Payment mode" name="payment-mode" ref={paymentMode} value="Cash on delivery" disabled className="form-control-sm" />
 
-            <Button className="float-end mx-2" style={"dark"} disabled={isSubmitting}>
+            <Button className="float-end ms-2 " style={"dark"} disabled={isSubmitting}>
                 {
                     isSubmitting ? "Submitting.." : "Place Order"
                 }
             </Button>
-            <Button type="button" className="float-end" style={"dark"} onClick={backToCart}>
-                <FontAwesomeIcon icon={faArrowLeft}/> Back to Cart
-            </Button>
-            <Button type="button" className="float-end" style={"light"} onClick={closeCheckOutPage}>Cancle</Button>
+          
+            <Link className="btn btn-dark float-end ms-2" to="/cart" >
+                <FontAwesomeIcon icon={faArrowLeft} /> Back to Cart
+            </Link>
+
+            <Link className="btn btn-light float-end" to="/">Cancle</Link>
+            {/* <Button type="button" className="float-end" style={"light"} onClick={closeCheckOutPage}>Cancle</Button> */}
         </form>
     </>
 
 
     const closeCheckoutButton = <div className="text-center my-2" >
-        <Button style={"dark"} onClick={closeCheckout}>Close</Button>
+        <Link to="/" className="btn btn-dark">Close</Link>
     </div>
 
 

@@ -2,22 +2,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Modal from "./Modal";
 import Button from "./Button";
 import OrderDetails from "./OrderDetails";
+import { Link } from "react-router-dom";
 
 
-export default function OrdersPage({ show, closeOrders }) {
+export default function OrdersPage({closeOrders }) {
 
     const modalRef = useRef()
 
     useEffect(function () {
-        if (show) {
-            modalRef.current.openModel()
-        }
-
-        if (!show) {
-            // console.log("calling: modalRef.current.closeModel() ");       
-            modalRef.current.closeModel()
-        }
-    }, [show])
+        modalRef.current.openModel()
+    }, [])
 
 
     const [orders, setOrders] = useState([])
@@ -39,8 +33,7 @@ export default function OrdersPage({ show, closeOrders }) {
         setIsLoading(true)
 
         console.log("Loading orders");
-        
-                
+
         fetchOrders()
             .then((fetchedOrders) => {
                 setOrders(fetchedOrders)
@@ -48,17 +41,18 @@ export default function OrdersPage({ show, closeOrders }) {
             .catch((err) => {
                 setError(err.message || "Error Fetching Orders")
             })
-    }, [show])
+    }, [])
 
 
     return (
         <Modal ref={modalRef}>
 
             {
-                orders.map(order => <OrderDetails key={order.id} order={order}/>)
+                orders.map(order => <OrderDetails key={order.id} order={order} />)
             }
 
-            <Button style="dark" onClick={closeOrders}>Close</Button>
+            <Link className="btn btn-dark" to="/" onClick={closeOrders}>Close</Link>
+
         </Modal>
     )
 }

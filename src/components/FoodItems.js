@@ -15,7 +15,9 @@ export default function FoodItems({ }) {
         const response = await fetch("http://localhost:3001/food-items")
 
         if (!response.ok) {
-            console.log("Error fetching data: ", response.text);
+            const message = await response.text()
+            console.log("Error fetching data: ", message);
+            // throw new Response(JSON.stringify({message: "Error fetching data: "+message}), {status:500})
         } else {
             const data = await response.json()
             setFoodItems(data)
@@ -24,8 +26,8 @@ export default function FoodItems({ }) {
     }
 
     useState(() => {
-        const foodItemsData = fetchFoodItems()
-        setFoodItems(foodItems)
+        fetchFoodItems()
+        // setFoodItems(foodItems)
     }, [])
 
 

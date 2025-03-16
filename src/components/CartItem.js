@@ -43,7 +43,7 @@ export default function CartItem({ item }) {
                 </div>
                 <div className="col-4 pt-3">
                     <div className="float-end">
-                        <div class="btn-group" role="group" aria-label="Basic example">
+                        <div className="btn-group" role="group" aria-label="Basic example">
                             <button className="btn btn-success" onClick={() => removeItem(item.id)}>
                                 <FontAwesomeIcon icon={faMinus} />
                             </button>
