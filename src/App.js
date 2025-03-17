@@ -7,18 +7,20 @@ import Cart from './components/Cart';
 import OrdersPage, { ordersLoader } from './components/OrdersPage';
 import CheckOutPage, { handlePlaceOrder } from './components/CheckOutPage';
 import ErrorElement from './components/ErrorElement';
+import { Provider } from 'react-redux';
+import store from './store/CartStore';
 
 function App() {
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element:  <>
-                  <Header /><FoodItems />
-                </>,
+      element: <>
+        <Header /><FoodItems />
+      </>,
       loader: foodItemsLoader,
       errorElement: <ErrorElement />,
-      HydrateFallback: () => [],  
+      HydrateFallback: () => [],
       children: [
         {
           path: "cart",
@@ -39,11 +41,10 @@ function App() {
 
   return (
     <>
-      <CartConextProvider>
+      <Provider store={store}>
         <RouterProvider router={router}>
         </RouterProvider>
-      </CartConextProvider>
-
+      </Provider>
     </>
   );
 }

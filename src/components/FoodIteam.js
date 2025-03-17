@@ -3,11 +3,20 @@ import Button from "./Button";
 import { faCircle, faIndianRupeeSign, faStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStartReg } from "@fortawesome/free-regular-svg-icons";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../store/CartStore";
 
 
-export default function FoodItem({ foodItem, onClick }) {
+export default function FoodItem({ foodItem }) {
 
     const vegIcon = foodItem.veg ? "text-success border border-1 border-success p-1" : "text-danger border border-1 border-danger p-1"
+
+    const dispatch = useDispatch()
+
+    function addToCart() {
+        dispatch(cartActions.addItem(foodItem))
+    }
+
 
     const [cardStyle, setCardStyle] = useState("")
 
@@ -41,7 +50,7 @@ export default function FoodItem({ foodItem, onClick }) {
                            {foodItem.details}
                         </span>
                     </p>
-                    <Button style={"outline-dark"} onClick={onClick}>Add to cart</Button>
+                    <Button className="btn btn-warning text-light" onClick={addToCart}>Add to cart</Button>
                 </div>
             </div>
         </div>

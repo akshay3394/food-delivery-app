@@ -1,12 +1,10 @@
-import { useContext } from "react"
-import CartContext from "../store/CartContext"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faMinus, faIndianRupeeSign, faStar, faCircle } from "@fortawesome/free-solid-svg-icons"
 import { faStar as faStartReg } from "@fortawesome/free-regular-svg-icons";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../store/CartStore";
 
 export default function CartItem({ item }) {
-
-    const { addItem, removeItem } = useContext(CartContext)
 
     const imageStyle = {
         backgroundImage: `url('http://localhost:3001/${item.image}')`,
@@ -15,6 +13,17 @@ export default function CartItem({ item }) {
     }
 
     const vegIcon = item.veg ? "text-success border border-1 border-success p-1" : "text-danger border border-1 border-danger p-1"
+
+
+    const dispatch = useDispatch()
+
+    function addItemToCart() {
+        dispatch(cartActions.addItem(item))
+    }
+
+    function removeItemFromCart(){
+        dispatch(cartActions.removeItem(item.id))
+    }
 
     return (
         <div className="container">
@@ -44,13 +53,13 @@ export default function CartItem({ item }) {
                 <div className="col-4 pt-3">
                     <div className="float-end">
                         <div className="btn-group" role="group" aria-label="Basic example">
-                            <button className="btn btn-success" onClick={() => removeItem(item.id)}>
+                            <button className="btn btn-success" onClick={removeItemFromCart}>
                                 <FontAwesomeIcon icon={faMinus} />
                             </button>
                             <span className="text-bg-success px-1 py-2">
                                 {item.quantity}
                             </span>
-                            <button className="btn btn-success" onClick={() => addItem(item)}>
+                            <button className="btn btn-success" onClick={addItemToCart}>
                                 <FontAwesomeIcon icon={faPlus} />
                             </button>
                         </div>

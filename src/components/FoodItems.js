@@ -1,20 +1,11 @@
-import { Suspense, use, useContext, useEffect, useState } from "react";
+import { Suspense } from "react";
 import Loader from "./Loader";
 import FoodItem from "./FoodIteam";
-import CartContext from "../store/CartContext";
 import { Await, useLoaderData } from "react-router-dom";
-import ErrorElement from "./ErrorElement";
 
 export default function FoodItems({ }) {
 
-    const { items, addItem, removeItem } = useContext(CartContext)
-
     const { foodItems } = useLoaderData()
-
-    function addItemToCart(itemToAdd) {
-        addItem(itemToAdd)
-    }
-
 
     return (
         <div className="container mt-4">
@@ -24,8 +15,8 @@ export default function FoodItems({ }) {
                         {
                             (fetchedFoodItems) => {
                                 return fetchedFoodItems
-                                        .map(foodItem => <FoodItem key={foodItem.name} foodItem={foodItem} onClick={() => addItemToCart(foodItem)} />)
-                                
+                                    .map(foodItem => <FoodItem key={foodItem.name} foodItem={foodItem} />)
+
                             }
                         }
                     </Await>

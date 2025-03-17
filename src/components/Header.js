@@ -1,16 +1,15 @@
 import NavbarBrand from "./NavbarBrand"
 import Nav from "./Nav"
-import { useContext, useState } from "react"
-import CartContext from "../store/CartContext"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartShopping, faTree } from "@fortawesome/free-solid-svg-icons"
 import { faLemon } from "@fortawesome/free-regular-svg-icons"
 import { Link, Outlet } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 function Header({ }) {
 
-    const { items } = useContext(CartContext)
-    
+    const items = useSelector(state=>state.cart.items)
+
     let numberOfItems = items.reduce((prev, item) => prev + item.quantity, 0)
 
     return (

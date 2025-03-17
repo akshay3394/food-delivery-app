@@ -1,18 +1,19 @@
 import Input from "./Input";
-import { useContext, useEffect, useRef, useState } from "react";
-import CartContext from "../store/CartContext";
+import { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import Modal from "./Modal";
 import { faArrowLeft, faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../store/CartStore";
 
 
 export default function CheckOutPage() {
 
     const modalRef = useRef()
 
-    const { items, clearCart } = useContext(CartContext)
+    const items = useSelector(state => state.cart.items)
 
     const [submitting, setIsSubmitting] = useState("")
 
@@ -27,9 +28,9 @@ export default function CheckOutPage() {
     const addressRef = useRef()
     const paymentMode = useRef()
 
-
+    const dispatch = useDispatch()
     function clearAllCart() {
-        clearCart()
+        dispatch(cartActions.clearCart())
     }
 
     const navigate = useNavigate()
@@ -93,13 +94,13 @@ export default function CheckOutPage() {
             <Input label="Address" name="address" ref={addressRef} textarea required={true} className="form-control-sm" />
             <Input label="Payment mode" name="payment-mode" ref={paymentMode} value="Cash on delivery" disabled className="form-control-sm" />
 
-            <Button className="float-end ms-2 " style={"dark"} disabled={isSubmitting}>
+            <Button className="btn btn-success text-light float-end ms-2 " disabled={isSubmitting}>
                 {
                     isSubmitting ? "Submitting.." : "Place Order"
                 }
             </Button>
           
-            <Link className="btn btn-dark float-end ms-2" to="/cart" >
+            <Link className="btn btn-warning float-end ms-2" to="/cart" >
                 <FontAwesomeIcon icon={faArrowLeft} /> Back to Cart
             </Link>
 

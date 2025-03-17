@@ -34,7 +34,7 @@ export default function Button({ id = null, children, style, ...props }) {
             break;
 
         default:
-            buttonStyle += " btn-dark"
+            buttonStyle += " btn"
     }
 
 

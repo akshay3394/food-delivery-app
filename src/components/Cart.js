@@ -5,13 +5,14 @@ import CartItem from "./CartItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 export default function Cart() {
 
     const modalRef = useRef()
 
-    const { items } = useContext(CartContext)
+    const items = useSelector(state => state.cart.items)
 
     useEffect(function () {
         modalRef.current.openModel()
@@ -22,7 +23,7 @@ export default function Cart() {
     let numberOfItems = items.reduce((prev, item) => prev + item.quantity, 0)
 
     const navigate = useNavigate()
-    function closeCart(){
+    function closeCart() {
         navigate("/")
     }
 
@@ -45,9 +46,9 @@ export default function Cart() {
             <Link className="btn btn-light" to="/">close</Link>
 
             {
-                items.length > 0 && <Link className="btn btn-dark" to="/checkout" >
-                        Proceed to checkout <FontAwesomeIcon icon={faArrowRight} />
-                    </Link>
+                items.length > 0 && <Link className="btn btn-success ms-2" to="/checkout" >
+                    Proceed to checkout <FontAwesomeIcon icon={faArrowRight} />
+                </Link>
             }
 
 
