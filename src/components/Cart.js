@@ -1,14 +1,13 @@
 import { useContext, useEffect, useRef } from "react";
 import Modal from "./Modal";
 import CartContext from "../store/CartContext";
-import Button from "./Button";
 import CartItem from "./CartItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
-export default function Cart({ closeCart, openCheckout }) {
+export default function Cart() {
 
     const modalRef = useRef()
 
@@ -22,13 +21,10 @@ export default function Cart({ closeCart, openCheckout }) {
 
     let numberOfItems = items.reduce((prev, item) => prev + item.quantity, 0)
 
-
-    function openCheckoutPage() {
-        closeCart()
-        openCheckout()
+    const navigate = useNavigate()
+    function closeCart(){
+        navigate("/")
     }
-
-
 
     return (
 
@@ -46,7 +42,7 @@ export default function Cart({ closeCart, openCheckout }) {
             </div>
 
 
-            <Link className="btn btn-light" to="/" onClick={closeCart}>close</Link>
+            <Link className="btn btn-light" to="/">close</Link>
 
             {
                 items.length > 0 && <Link className="btn btn-dark" to="/checkout" >

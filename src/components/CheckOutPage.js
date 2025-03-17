@@ -5,10 +5,10 @@ import Button from "./Button";
 import Modal from "./Modal";
 import { faArrowLeft, faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
-export default function CheckOutPage({ closeCheckOutPage, openCart }) {
+export default function CheckOutPage() {
 
     const modalRef = useRef()
 
@@ -32,11 +32,10 @@ export default function CheckOutPage({ closeCheckOutPage, openCart }) {
         clearCart()
     }
 
-    function closeCheckout() {
-        setIsSubmitting("")
-        closeCheckOutPage()
+    const navigate = useNavigate()
+    function closeCheckout(){
+        navigate("/")
     }
-
 
     function placeOrderRequest(orderDetails) {
 
@@ -66,20 +65,6 @@ export default function CheckOutPage({ closeCheckOutPage, openCart }) {
 
         const formData = new FormData(event.target)
 
-        // const name = formData.get("name")
-        // const phone = formData.get("phone")
-        // const address = formData.get("address")
-        // const paymentMode = formData.get("payment-mode")
-
-        // const orderDetails = {
-        //     name,
-        //     phone,
-        //     address,
-        //     paymentMode,
-        //     items: items.map(item => ({ id: item.id, quantity: item.quantity })),
-        //     totalPrice: totalPrice
-        // }
-
         let orderDetails = Object.fromEntries(formData)
 
         orderDetails["items"] = items
@@ -88,11 +73,6 @@ export default function CheckOutPage({ closeCheckOutPage, openCart }) {
 
         placeOrderRequest(orderDetails)
         clearAllCart()
-    }
-
-    function backToCart() {
-        closeCheckOutPage()
-        openCart()
     }
 
     const isSubmitting = submitting == "submitting"
@@ -124,7 +104,6 @@ export default function CheckOutPage({ closeCheckOutPage, openCart }) {
             </Link>
 
             <Link className="btn btn-light float-end" to="/">Cancle</Link>
-            {/* <Button type="button" className="float-end" style={"light"} onClick={closeCheckOutPage}>Cancle</Button> */}
         </form>
     </>
 
@@ -135,7 +114,7 @@ export default function CheckOutPage({ closeCheckOutPage, openCart }) {
 
 
     return (
-        <Modal ref={modalRef} onClose={closeCheckOutPage}>
+        <Modal ref={modalRef} onClose={closeCheckout}>
             {
                 isSubmitting && <h4 className="text-center my-4">Placing order...</h4>
             }

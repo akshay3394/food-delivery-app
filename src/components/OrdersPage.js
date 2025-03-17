@@ -1,12 +1,12 @@
 import { Suspense, useEffect, useRef } from "react";
 import Modal from "./Modal";
 import OrderDetails from "./OrderDetails";
-import { Await, Link, useLoaderData } from "react-router-dom";
+import { Await, Link, useLoaderData, useNavigate } from "react-router-dom";
 import Loader from "./Loader";
 import ErrorElement from "./ErrorElement";
 
 
-export default function OrdersPage({ closeOrders }) {
+export default function OrdersPage() {
 
     const modalRef = useRef()
 
@@ -17,9 +17,15 @@ export default function OrdersPage({ closeOrders }) {
 
     const {orders} = useLoaderData()
 
+    
+    const navigate = useNavigate()
+    function closeCheckout(){
+        navigate("/")
+    }
+
 
     return (
-        <Modal ref={modalRef}>
+        <Modal ref={modalRef} onClose={closeCheckout}>
 
             <Suspense fallback={<Loader />}>
                 <Await resolve={orders} errorElement={<ErrorElement/>}>
@@ -28,7 +34,7 @@ export default function OrdersPage({ closeOrders }) {
                     }
                 </Await>
             </Suspense>
-            <Link className="btn btn-dark" to="/" onClick={closeOrders}>Close</Link>
+            <Link className="btn btn-dark" to="/">Close</Link>
         </Modal>
     )
 }
