@@ -1,6 +1,5 @@
 import { act, useReducer } from "react"
 import CartContext from "../store/CartContext"
-import { type } from "@testing-library/user-event/dist/type"
 
 export function CartConextProvider({ children }) {
 

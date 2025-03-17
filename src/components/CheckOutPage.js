@@ -61,7 +61,7 @@ export default function CheckOutPage({ closeCheckOutPage, openCart }) {
 
     }
 
-    function handlePlaceOrder(event) {
+    function handlePlaceOrder({event}) {
         event.preventDefault()
 
         const formData = new FormData(event.target)
@@ -107,7 +107,7 @@ export default function CheckOutPage({ closeCheckOutPage, openCart }) {
             Total: {totalPrice} <FontAwesomeIcon icon={faIndianRupeeSign} />
         </h4>
 
-        <form onSubmit={handlePlaceOrder}>
+        <form action={handlePlaceOrder}>
             <Input label="Full Name" name="name" ref={nameRef} required={true} className="form-control-sm" />
             <Input label="Phone" type="number" name="phone" ref={phoneRef} required={true} className="form-control-sm" />
             <Input label="Address" name="address" ref={addressRef} textarea required={true} className="form-control-sm" />

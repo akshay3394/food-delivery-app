@@ -72,13 +72,7 @@ function Header({ }) {
 
                 </div>
             </Nav>
-
-            {/* <Cart show={isOpenCart} closeCart={closeCart} openCheckout={openCheckout} /> */}
-
-            {/* <CheckOutPage show={isShowCheckout} closeCheckOutPage={closeCheckout} openCart={openCart} /> */}
-
-            {/* <OrdersPage show={isShowOrders} closeOrders={closeOrders} /> */}
-
+            
             <Outlet></Outlet>
         </>
     )
