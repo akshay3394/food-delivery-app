@@ -1,6 +1,5 @@
-import { Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import Modal from "./Modal";
-import Button from "./Button";
 import OrderDetails from "./OrderDetails";
 import { Await, Link, useLoaderData } from "react-router-dom";
 import Loader from "./Loader";
@@ -14,40 +13,6 @@ export default function OrdersPage({ closeOrders }) {
     useEffect(function () {
         modalRef.current.openModel()
     }, [])
-
-
-    // const [orders, setOrders] = useState([])
-    // const [isLoading, setIsLoading] = useState(false)
-    // const [error, setError] = useState()
-
-    // async function fetchOrders() {
-    //     const response = await fetch("http://localhost:3001/orders")
-
-    //     if (!response.ok) {
-    //         const errorMessage = await response.text()
-    //         throw new Error(errorMessage || "Error Fetching Orders")
-    //     } else {
-    //         return await response.json()
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     setIsLoading(true)
-
-    //     console.log("Loading orders");
-
-    //     fetchOrders()
-    //         .then((fetchedOrders) => {
-    //             setOrders(fetchedOrders)
-    //             setIsLoading(false)
-
-    //         })
-    //         .catch((err) => {
-    //             setError(err.message || "Error Fetching Orders")
-    //             setIsLoading(false)
-
-    //         })
-    // }, [])
 
 
     const {orders} = useLoaderData()
@@ -69,7 +34,7 @@ export default function OrdersPage({ closeOrders }) {
 }
 
 async function fetchOrders(){
-    const response = await fetch("http://localhost:3001/orderss")
+    const response = await fetch("http://localhost:3001/orders")
 
     if (!response.ok) {
         let errorMessage = await response.text()
