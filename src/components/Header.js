@@ -1,7 +1,7 @@
 import NavbarBrand from "./NavbarBrand"
 import Nav from "./Nav"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCartShopping, faTree } from "@fortawesome/free-solid-svg-icons"
+import { faCartShopping, faChessKing, faCrown, faTree } from "@fortawesome/free-solid-svg-icons"
 import { faLemon } from "@fortawesome/free-regular-svg-icons"
 import { Link, Outlet } from "react-router-dom"
 import { useSelector } from "react-redux"
@@ -16,7 +16,7 @@ function Header({ }) {
         <>
             <Nav>
                 <NavbarBrand>
-                    <FontAwesomeIcon icon={faLemon} size="lg" /> Lemon tree <FontAwesomeIcon icon={faTree} size="lg" />
+                <b style={{fontSize: 30}}> <FontAwesomeIcon icon={faCrown} size="lg" /> King Cafe </b>
                 </NavbarBrand>
 
                 <div className="float-end">
