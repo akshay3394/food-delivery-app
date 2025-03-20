@@ -19,7 +19,8 @@ const Modal = forwardRef(function Modal({ children, ...props }, ref) {
 
 
     return createPortal(
-        <dialog ref={modalRef} className="border rounded shadow-lg w-50 py-2" {...props}>
+        // <dialog ref={modalRef} className="border rounded shadow-lg w-50 py-2" {...props}>
+        <dialog ref={modalRef} className="border rounded shadow-lg col-lg-6 col-md-12 py-2" {...props}>
             {children}
         </dialog>,
         document.getElementById("modal-box")

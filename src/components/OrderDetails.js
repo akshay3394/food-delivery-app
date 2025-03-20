@@ -8,23 +8,6 @@ export default function OrderDetails({ order }) {
 
     return (
         <div className="container">
-
-            {/* <div className="card border m-2">
-                <div className="card-header">
-                    Order # - {order.id}
-                </div>
-                <div className="card-body">
-                    <div className="card-text">
-                        {
-                            order.items.map(item => <OrderItem item={item} />)
-                        }
-                    </div>
-                </div>
-                <div className="card-footer text-end">
-                    Total price: Rs. {order.totalPrice}
-                </div>
-            </div> */}
-
             <div className="accordion mb-2" id="orders">
                 <div className="accordion-item">
                     <h2 className="accordion-header">
@@ -35,8 +18,13 @@ export default function OrderDetails({ order }) {
                     <div id={order.id} className="accordion-collapse collapse" data-bs-parent="#orders">
                         <div className="accordion-body p-0">
                             <div className="card">
-                                <div className="card-header">
-                                    Status - {order.status}
+                                <div className="card-header row">
+                                    <div className="col">
+                                        Status - {order.status}
+                                    </div>
+                                    <div className="col">
+                                        Payment Mode: {order["payment-mode"]}
+                                    </div>
                                 </div>
                                 <div className="card-header fs-6 fw-light">
                                     <div className="row">

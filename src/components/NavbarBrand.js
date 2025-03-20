@@ -2,6 +2,8 @@
 export default function NavbarBrand({ children }) {
 
     return (
-        <a href="#" className="navbar-brand ms-4  text-warning">{children}</a>
+        <div className="col-md-4 col-sm-12">
+            <a href="#" className="navbar-brand ms-4  text-danger">{children}</a>
+        </div>
     )
 }

@@ -17,7 +17,7 @@ export default function SearchBox() {
     const search = searchParam.get("search")
 
     return (
-            <div className="d-flex" role="search">
+            <div className="col-md-4 col-xs-8 offset-xs-2 " >
                 <div className="input-group">
                 <input className="form-control" type="search" placeholder="Search food items" defaultValue={search} ref={searchKeyWord} onBlur={searchFoodItem}/>
                 <button className="btn btn-outline-secondary" type="button" onClick={searchFoodItem}>

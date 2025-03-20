@@ -17,19 +17,18 @@ function Header({ }) {
         <>
             <Nav>
                 <NavbarBrand>
-                <b style={{fontSize: 30}}> <FontAwesomeIcon icon={faCrown} size="lg" /> King Cafe </b>
+                    <b style={{fontSize: 30}}> <FontAwesomeIcon icon={faCrown} size="lg" className="text-warning"/> King Cafe </b>
                 </NavbarBrand>
                 
                 <SearchBox />
 
-                <div className="float-end">
+                <div className="col-md-4 col-sm-12">
 
-                    <Link to="cart" className="btn btn-light">
+                    <Link to="orders" className="btn btn-light  float-end">Orders</Link>
+
+                    <Link to="cart" className="btn btn-light float-end">
                         <FontAwesomeIcon icon={faCartShopping} size="lg" /> ({numberOfItems})
                     </Link>
-
-                    <Link to="orders" className="btn btn-light">Orders</Link>
-
                 </div>
             </Nav>
 
