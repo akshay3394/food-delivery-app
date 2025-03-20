@@ -9,6 +9,10 @@ import CheckOutPage, { handlePlaceOrder } from './components/CheckOutPage';
 import ErrorElement from './components/ErrorElement';
 import { Provider } from 'react-redux';
 import store from './store/CartStore';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+export const queryClient = new QueryClient()
+
 
 function App() {
 
@@ -18,7 +22,7 @@ function App() {
       element: <>
         <Header /><FoodItems />
       </>,
-      loader: foodItemsLoader,
+      // loader: foodItemsLoader,
       errorElement: <ErrorElement />,
       HydrateFallback: () => [],
       children: [
@@ -33,18 +37,24 @@ function App() {
         {
           path: "orders",
           element: <OrdersPage />,
-          loader: ordersLoader
+          // loader: ordersLoader
+        }, {
+          path: "*",
+          element: <ErrorElement message='Page not found' />
         }
       ]
     }
   ])
 
+
   return (
     <>
-      <Provider store={store}>
-        <RouterProvider router={router}>
-        </RouterProvider>
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <RouterProvider router={router}>
+          </RouterProvider>
+        </Provider>
+      </QueryClientProvider>
     </>
   );
 }

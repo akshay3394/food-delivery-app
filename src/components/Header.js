@@ -5,6 +5,7 @@ import { faCartShopping, faChessKing, faCrown, faTree } from "@fortawesome/free-
 import { faLemon } from "@fortawesome/free-regular-svg-icons"
 import { Link, Outlet } from "react-router-dom"
 import { useSelector } from "react-redux"
+import SearchBox from "./SearchBox"
 
 function Header({ }) {
 
@@ -18,6 +19,8 @@ function Header({ }) {
                 <NavbarBrand>
                 <b style={{fontSize: 30}}> <FontAwesomeIcon icon={faCrown} size="lg" /> King Cafe </b>
                 </NavbarBrand>
+                
+                <SearchBox />
 
                 <div className="float-end">
 
