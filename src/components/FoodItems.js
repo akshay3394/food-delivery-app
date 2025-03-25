@@ -35,7 +35,7 @@ export default function FoodItems({ }) {
         queryKey.push(searchKeyWord)
     }
 
-    const { data: foodItems, isFetching, error, isError } = useQuery({
+    const { data: foodItems, isFetching, error, isError, isSuccess } = useQuery({
         queryKey: queryKey,
         queryFn: () => fetchFoodItems(searchKeyWord),
         staleTime: 30 * 1000,    
@@ -53,9 +53,14 @@ export default function FoodItems({ }) {
         content = <FoodItemsLoader />
     }
 
-    if (foodItems) {
+    if (isSuccess && foodItems) {
         content = foodItems.map(foodItem => <FoodItem key={foodItem.name} foodItem={foodItem} />)
     }
+
+    if (foodItems != undefined && foodItems.length == 0) {
+        content = <div className="alert alert-warning" role="alert">No results found. Try other search phrase</div>
+    }
+
 
 
     return (
