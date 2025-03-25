@@ -2,9 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "./Button";
 import { faCircle, faIndianRupeeSign, faStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStartReg } from "@fortawesome/free-regular-svg-icons";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../store/CartStore";
+import { Tooltip } from "bootstrap/dist/js/bootstrap.bundle.min";
 
 
 export default function FoodItem({ foodItem }) {
@@ -28,6 +29,22 @@ export default function FoodItem({ foodItem }) {
         setCardStyle("")
     }
 
+
+    const tooltipRef = useRef();
+
+    useEffect(() => {
+        
+        const tooltip = new Tooltip(tooltipRef.current, {
+            container: 'body',
+            trigger: 'hover',
+        });
+
+        return () => {
+            tooltip.dispose();
+        };
+    }, []);
+
+
     return (
         <div className={"col-sm-12 col-md-6 col-lg-4 py-2"} onMouseOver={highlightItem} onMouseLeave={unHighlightItem}>
             <div className={`card h-100 bg-light ${cardStyle}`}>
@@ -46,8 +63,10 @@ export default function FoodItem({ foodItem }) {
                     </div>
                     <p className="card-text"><FontAwesomeIcon icon={faIndianRupeeSign} /> {foodItem.price}</p>
                     <p className="card-text text-truncate">
-                        <span data-bs-toggle="tooltip" data-bs-title="Default tooltip">
-                           {foodItem.details}
+                        <span ref={tooltipRef} data-bs-toggle="tooltip" title={foodItem.details} data-bs-placement="top">
+                            {
+                             foodItem.details.substring(0, 50)
+                            }
                         </span>
                     </p>
                     <Button className="btn btn-warning text-light" onClick={addToCart}>Add to cart</Button>

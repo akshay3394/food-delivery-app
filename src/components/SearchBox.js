@@ -8,7 +8,9 @@ export default function SearchBox() {
     const searchKeyWord = useRef()
     const navigate = useNavigate()
 
-    function searchFoodItem() {
+    function searchFoodItem(event) {
+        event.preventDefault()
+        
         const keyWord = searchKeyWord.current.value
         navigate(`/?search=${keyWord}`)
     }
@@ -17,13 +19,15 @@ export default function SearchBox() {
     const search = searchParam.get("search")
 
     return (
-            <div className="col-md-4 col-xs-8 offset-xs-2 " >
+        <div className="col-md-4 col-xs-8 offset-xs-2 " >
+            <form onSubmit={searchFoodItem}>
                 <div className="input-group">
-                <input className="form-control" type="search" placeholder="Search food items" defaultValue={search} ref={searchKeyWord} onBlur={searchFoodItem}/>
-                <button className="btn btn-outline-secondary" type="button" onClick={searchFoodItem}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass}/>
-                </button>
+                    <input className="form-control" type="search" placeholder="Search food items" defaultValue={search} ref={searchKeyWord} />
+                    <button className="btn btn-outline-secondary" onClick={searchFoodItem}>
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </button>
                 </div>
-            </div>
+            </form>
+        </div>
     )
 }

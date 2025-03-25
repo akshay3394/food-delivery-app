@@ -5,6 +5,7 @@ import { Await, useLoaderData, useSearchParams } from "react-router-dom";
 import { QueryClient, useQuery, useSuspenseQuery } from "@tanstack/react-query"
 import ErrorElement from "./ErrorElement";
 import { queryClient } from "../App";
+import FoodItemsLoader from "./loaders/FoodItemsLoader";
 
 export default function FoodItems({ }) {
 
@@ -48,7 +49,8 @@ export default function FoodItems({ }) {
     }
 
     if (isFetching) {
-        content = <Loader />
+        // content = <Loader />
+        content = <FoodItemsLoader />
     }
 
     if (foodItems) {

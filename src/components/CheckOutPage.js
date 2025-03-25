@@ -24,10 +24,10 @@ export default function CheckOutPage() {
         modalRef.current.openModel()
     }, [])
 
-    const nameRef = useRef()
-    const phoneRef = useRef()
-    const addressRef = useRef()
-    const paymentMode = useRef()
+    // const nameRef = useRef()
+    // const phoneRef = useRef()
+    // const addressRef = useRef()
+    // const paymentMode = useRef()
 
     const dispatch = useDispatch()
     function clearAllCart() {
@@ -110,6 +110,7 @@ export default function CheckOutPage() {
 
         orderDetails["items"] = items
         orderDetails["totalPrice"] = totalPrice
+        orderDetails["payment-mode"] = "Cash On Delivery"
 
         // placeOrderRequest(orderDetails)
 
@@ -133,10 +134,10 @@ export default function CheckOutPage() {
         }
 
         <form onSubmit={handlePlaceOrder}>
-            <Input label="Full Name" name="name" ref={nameRef} className="form-control-sm"  />
-            <Input label="Phone" type="number" name="phone" ref={phoneRef} className="form-control-sm" />
-            <Input label="Address" name="address" ref={addressRef} textarea className="form-control-sm" />
-            <Input label="Payment mode" name="payment-mode" ref={paymentMode} defaultValue="Cash on delivery" disabled className="form-control-sm" />
+            <Input label="Full Name" name="name"  className="form-control-sm"  />
+            <Input label="Phone" type="number" name="phone" className="form-control-sm" />
+            <Input label="Address" name="address" textarea className="form-control-sm" />
+            <Input label="Payment mode" name="payment-mode" defaultValue="Cash on delivery" disabled className="form-control-sm" />
 
 
             <Button className="btn btn-success text-light float-end ms-2 " disabled={isPending}>
