@@ -7,12 +7,17 @@ import ErrorElement from "./ErrorElement";
 import { queryClient } from "../App";
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
+import { USER_DETAILS } from "./LoginPage";
 
 
-async function fetchOrders() {
+async function fetchOrders(sessionId) {
     console.log("Fetching orders");
 
-    const response = await fetch("http://localhost:3001/orders")
+    const response = await fetch("http://localhost:3001/orders", {
+        headers: {
+            "Session-Id" : sessionId
+        }
+    })
 
     if (!response.ok) {
         let errorMessage = await response.text()
@@ -38,9 +43,12 @@ export default function OrdersPage() {
 
     // const {orders} = useLoaderData()
 
+    // const userDetails = JSON.parse(localStorage.getItem(USER_DETAILS))
+    const sessionId = userDetails.sessionId
+
     const { data: orders, isLoading, error, isError } = useQuery({
         queryKey: ["orders"],
-        queryFn: fetchOrders,
+        queryFn: () => fetchOrders(sessionId),
         staleTime: 10 * 1000
     })
 
@@ -87,12 +95,13 @@ export default function OrdersPage() {
 export function ordersLoader() {
     console.log("Loading orders");
 
+    const userDetails = JSON.parse(localStorage.getItem(USER_DETAILS))
+    const sessionId = userDetails.sessionId
 
-
-    return {
+    return {    
         orders: queryClient.fetchQuery({
-            queryKey: ["orders"],
-            queryFn: fetchOrders,
+            queryKey: ["orders", sessionId],
+            queryFn: () => fetchOrders(sessionId),
             staleTime: 10 * 1000
         })
     }

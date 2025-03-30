@@ -20,6 +20,8 @@ export default function CheckOutPage() {
 
     const [validationErrros, setValidationErrors] = useState([])
 
+    const userDetails = useSelector(state => state.user)
+
     useEffect(function () {
         modalRef.current.openModel()
     }, [])
@@ -42,11 +44,14 @@ export default function CheckOutPage() {
     async function placeOrderRequest(orderDetails) {
 
         console.log("Submitting order");
+        console.log("Session-Id: "+orderDetails.sessionId);
+        
 
         const response = await fetch("http://localhost:3001/orders", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Session-Id" : orderDetails.sessionId
             },
             body: JSON.stringify(orderDetails),
         })
@@ -108,6 +113,7 @@ export default function CheckOutPage() {
             return
         }
 
+        orderDetails["sessionId"] = userDetails.sessionId
         orderDetails["items"] = items
         orderDetails["totalPrice"] = totalPrice
         orderDetails["payment-mode"] = "Cash On Delivery"
