@@ -6,11 +6,12 @@ import Loader from "./Loader";
 import ErrorElement from "./ErrorElement";
 import { queryClient } from "../App";
 import { useQuery } from "@tanstack/react-query";
+import { useSelector } from "react-redux";
 
 
-async function fetchOrders(){
+async function fetchOrders() {
     console.log("Fetching orders");
-    
+
     const response = await fetch("http://localhost:3001/orders")
 
     if (!response.ok) {
@@ -27,6 +28,9 @@ export default function OrdersPage() {
 
     const modalRef = useRef()
 
+    const userDetails = useSelector(state => state.user)
+    const navigate = useNavigate()
+
     useEffect(function () {
         modalRef.current.openModel()
     }, [])
@@ -34,15 +38,14 @@ export default function OrdersPage() {
 
     // const {orders} = useLoaderData()
 
-    const {data: orders, isLoading, error, isError} = useQuery({
+    const { data: orders, isLoading, error, isError } = useQuery({
         queryKey: ["orders"],
         queryFn: fetchOrders,
         staleTime: 10 * 1000
     })
 
-    
-    const navigate = useNavigate()
-    function closeCheckout(){
+
+    function closeCheckout() {
         navigate("/")
     }
 
@@ -53,7 +56,7 @@ export default function OrdersPage() {
     }
 
     if (isLoading) {
-        content = <Loader/>
+        content = <Loader />
     }
 
     if (orders) {
@@ -84,8 +87,10 @@ export default function OrdersPage() {
 export function ordersLoader() {
     console.log("Loading orders");
 
+
+
     return {
-        orders : queryClient.fetchQuery({
+        orders: queryClient.fetchQuery({
             queryKey: ["orders"],
             queryFn: fetchOrders,
             staleTime: 10 * 1000

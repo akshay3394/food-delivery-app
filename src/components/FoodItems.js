@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import Loader from "./Loader";
 import FoodItem from "./FoodIteam";
-import { Await, useLoaderData, useSearchParams } from "react-router-dom";
+import { Await, useLoaderData, useLocation, useSearchParams } from "react-router-dom";
 import { QueryClient, useQuery, useSuspenseQuery } from "@tanstack/react-query"
 import ErrorElement from "./ErrorElement";
 import { queryClient } from "../App";
@@ -26,6 +26,7 @@ export default function FoodItems({ }) {
     //     }
     // }
 
+    
     const [searchParam] = useSearchParams()
 
     const searchKeyWord = searchParam.get("search")
@@ -49,7 +50,6 @@ export default function FoodItems({ }) {
     }
 
     if (isFetching) {
-        // content = <Loader />
         content = <FoodItemsLoader />
     }
 
@@ -61,7 +61,11 @@ export default function FoodItems({ }) {
         content = <div className="alert alert-warning" role="alert">No results found. Try other search phrase</div>
     }
 
-
+    const {pathname} = useLocation()
+    // Not good code but this is to avoid showing food items on login & signup page
+    if (pathname == "/login" || pathname == "/signup") {
+        content = <></>
+    }
 
     return (
         <div className="container mt-4">

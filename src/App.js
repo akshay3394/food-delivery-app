@@ -8,8 +8,10 @@ import OrdersPage, { ordersLoader } from './components/OrdersPage';
 import CheckOutPage, { handlePlaceOrder } from './components/CheckOutPage';
 import ErrorElement from './components/ErrorElement';
 import { Provider } from 'react-redux';
-import store from './store/CartStore';
+import store from './store/appStore';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import LoginPage from './components/LoginPage';
+import SignupPage from './components/SignupPage';
 
 export const queryClient = new QueryClient()
 
@@ -38,7 +40,15 @@ function App() {
           path: "orders",
           element: <OrdersPage />,
           // loader: ordersLoader
-        }, {
+        }, 
+        {
+          path: "login",
+          element: <LoginPage />
+        },{
+          path: "signup",
+          element: <SignupPage />
+        },
+        {
           path: "*",
           element: <ErrorElement message='Page not found' />
         }

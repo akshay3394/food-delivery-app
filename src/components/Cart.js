@@ -27,6 +27,8 @@ export default function Cart() {
         navigate("/")
     }
 
+    const userDetails = useSelector(state => state.user)
+
     return (
 
         <Modal ref={modalRef} onClose={closeCart}>
@@ -46,11 +48,13 @@ export default function Cart() {
             <Link className="btn btn-light" to="/">close</Link>
 
             {
-                items.length > 0 && <Link className="btn btn-success ms-2" to="/checkout" >
+                (items.length > 0 && userDetails.sessionId) && <Link className="btn btn-success ms-2" to="/checkout" >
                     Proceed to checkout <FontAwesomeIcon icon={faArrowRight} />
                 </Link>
             }
-
+            {
+                !userDetails.sessionId && <Link className="btn btn-success ms-2" to="/login?navigateTo=cart" >Login to proceed</Link>
+            }
 
         </Modal>
 
