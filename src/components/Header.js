@@ -25,6 +25,8 @@ function Header({ }) {
     function logoutHandler() {
         console.log("Logging out");
         dispatch(userActions.removeUserDetails())
+
+        localStorage.removeItem(USER_DETAILS)
     }
 
 

@@ -5,7 +5,7 @@ import FoodItems, { foodItemsLoader } from './components/FoodItems';
 import Header from './components/Header';
 import Cart from './components/Cart';
 import OrdersPage, { ordersLoader } from './components/OrdersPage';
-import CheckOutPage, { handlePlaceOrder } from './components/CheckOutPage';
+import CheckOutPage, { checkoutLoader, handlePlaceOrder } from './components/CheckOutPage';
 import ErrorElement from './components/ErrorElement';
 import { Provider } from 'react-redux';
 import store from './store/appStore';
@@ -35,11 +35,12 @@ function App() {
         {
           path: "checkout",
           element: <CheckOutPage />,
+          loader: checkoutLoader
         },
         {
           path: "orders",
           element: <OrdersPage />,
-          // loader: ordersLoader
+          loader: ordersLoader
         }, 
         {
           path: "login",

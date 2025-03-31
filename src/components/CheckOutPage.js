@@ -4,10 +4,11 @@ import Button from "./Button";
 import Modal from "./Modal";
 import { faArrowLeft, faArrowRight, faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../store/CartStore";
 import { useMutation } from "@tanstack/react-query";
+import { USER_DETAILS } from "./LoginPage";
 
 
 export default function CheckOutPage() {
@@ -199,4 +200,14 @@ export default function CheckOutPage() {
 
         </Modal>
     )
+}
+
+export const checkoutLoader = () => {
+    let userDetails = localStorage.getItem(USER_DETAILS)
+
+    if (!userDetails) {
+        return redirect("/login")
+    }
+
+    return null
 }

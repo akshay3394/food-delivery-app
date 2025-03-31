@@ -1,10 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialUserDetails = {
+let initialUserDetails = {
     sessionId: "",
     userId: "",
     name: ""
 }
+
+let userDetails = localStorage.getItem("USER_DETAILS")
+
+if (userDetails) {
+    initialUserDetails = JSON.parse(userDetails)
+}
+
+
 
 export const userSlice = createSlice({
     name: "user",
@@ -15,7 +23,11 @@ export const userSlice = createSlice({
             return userDetails;
         },
         removeUserDetails: (state, action) => {
-            return initialUserDetails
+            return {
+                sessionId: "",
+                userId: "",
+                name: ""
+            }
         }
     }
 })
